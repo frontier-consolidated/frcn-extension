@@ -1,0 +1,45 @@
+{
+    "manifest_version": 3,
+    "name": "FRCN Extension",
+    "short_name": "FRCN",
+    "description": "Adds additional functionality to the Frontier Consolidated website",
+    "version": "1.0.0",
+    "icons": {
+        "128": "logo.svg"
+    },
+    "action": {
+        "default_icon": {
+            "128": "logo.svg"
+        },
+        "default_title": "Frontier Consolidated"
+    },
+    "background": {
+        "service_worker": "./background.global.js"
+    },
+    "content_scripts": [
+        {
+            "css": [],
+            "js": [
+                "integration.global.js"
+            ],
+            "matches": [
+                "https://frontierconsolidated.com/*"
+            ],
+            "run_at": "document_start"
+        }
+    ],
+    "default_locale": "en",
+    "permissions": [
+        "storage",
+        "cookies",
+        "unlimitedStorage"
+    ],
+    "content_security_policy": {
+        "object-src": "self",
+        "script-src": "self",
+        "worker-src": "self"
+    },
+    "host_permissions": [
+        "https://robertsspaceindustries.com/*"
+    ]
+}

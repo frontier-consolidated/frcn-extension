@@ -1,0 +1,21 @@
+{
+  "name": "frcn-extension",
+  "version": "1.0.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build:bundle": "vite build && vite build -m background",
+    "build:chrome": "cp -r out/bundle/ out/chrome && cp manifests/manifest.chrome.json out/chrome/manifest.json",
+    "build:firefox": "cp -r out/bundle/ out/firefox && cp manifests/manifest.firefox.json out/firefox/manifest.json",
+    "build": "pnpm build:bundle && pnpm build:chrome && pnpm build:firefox"
+  },
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.11.20",
+    "@types/webextension-polyfill": "^0.10.7",
+    "autoprefixer": "^10.4.17",
+    "typescript": "^5.3.3",
+    "vite": "^5.1.1",
+    "webextension-polyfill": "^0.10.0"
+  }
+}
