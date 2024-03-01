@@ -5,17 +5,25 @@
   "private": true,
   "scripts": {
     "build:bundle": "vite build && vite build -m background",
-    "build:chrome": "cp -r out/bundle/ out/chrome && cp manifests/manifest.chrome.json out/chrome/manifest.json",
-    "build:firefox": "cp -r out/bundle/ out/firefox && cp manifests/manifest.firefox.json out/firefox/manifest.json",
-    "build": "pnpm build:bundle && pnpm build:chrome && pnpm build:firefox"
+    "build:chrome": "rm -rf build/chrome && cp -r build/bundle/ build/chrome && cp build/chrome/config/manifest.chrome.json build/chrome/manifest.json && rm -rf build/chrome/config",
+    "build:firefox": "rm -rf build/firefox && cp -r build/bundle/ build/firefox && cp build/firefox/config/manifest.firefox.json build/firefox/manifest.json && rm -rf build/firefox/config",
+    "build": "pnpm build:bundle && pnpm build:chrome && pnpm build:firefox",
+    "package:chrome": "bestzip out/frcn-extension@chrome.zip build/chrome/",
+    "package:firefox": "bestzip out/frcn-extension@firefox.zip build/firefox/",
+    "package": "mkdir out && pnpm package || pnpm package:chrome && pnpm package:firefox",
+    "build-package": "pnpm build && pnpm package"
   },
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^20.11.20",
     "@types/webextension-polyfill": "^0.10.7",
     "autoprefixer": "^10.4.17",
+    "bestzip": "^2.2.1",
     "typescript": "^5.3.3",
     "vite": "^5.1.1",
     "webextension-polyfill": "^0.10.0"
+  },
+  "dependencies": {
+    "axios": "^1.6.7"
   }
 }
